@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="icon" href="images/example.png">
+
+	<!-- ### Change lab number ### -->
+    <title>COMP 2211 PA2: MLP & CNN</title>
+
+   <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/blog-home.css" rel="stylesheet">
+
+  <!-- For code highlighting -->
+  <link href="vendor/prism/prism.css" rel="stylesheet" />
+
+  <style>
+    pre {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      border-left: 3px solid #f36d33;
+      color: #666;
+      page-break-inside: avoid;
+      font-family: monospace;
+
+      line-height: 1.6;
+      margin-bottom: 1.6em;
+      max-width: 100%;
+      overflow: auto;
+      padding: 0.2em 0.8em!important;
+      display: block;
+      word-wrap: break-word;
+    }
+
+    pre > code {
+      font-size: 12px !important;
+    }
+
+    span.input {
+      color: #00f700;
+      ;
+    }
+
+    table {
+      width: 100%;
+      display: inline-block;
+      overflow-x: auto;
+    }
+
+    table caption {
+      font-size: medium;
+    }
+
+    table thead th {
+      background-color: #ddd;
+    }
+
+    table th,
+    table td {
+      text-align: left;
+      padding: 3px 6px;
+      border-width: 1px;
+      border-style: solid;
+      border-color: #aaa #aaa;
+    }
+
+    table tr:nth-child(even) {
+      background-color: #eee;
+    }
+
+    blockquote {
+      border: 1px solid #b3b3b3;
+      border-left: 10px solid #b3b3b3;
+      border-radius: 0px;
+      background: #fafafa;
+      font-size: 18px;
+      font-family: Georgia, serif;
+      margin: 10px;
+      padding: 10px 20px;
+    }
+
+    blockquote p {
+      margin: 0;
+      line-height: 30px;
+      padding-bottom: 20px;
+    }
+
+    blockquote.small {
+      display: block;
+      font-size: 80%;
+      color: brown;
+      text-align: right;
+    }
+
+    code {
+      /* color: goldenrod; */
+      font-size: 1em;
+      /* background: none !important; */
+    }
+
+    figure.figure {
+      width: 100%;
+      text-align: center;
+    }
+
+    .bd-callout {
+      padding: 1.25rem;
+      margin-top: 1.25rem;
+      margin-bottom: 1.25rem;
+      border: 1px solid #eee;
+      border-left-width: .25rem;
+      border-radius: .25rem;
+    }
+
+    .bd-callout h4 {
+      margin-top: 0;
+      margin-bottom: .25rem;
+    }
+
+    .bd-callout p:last-child {
+      margin-bottom: 0;
+    }
+
+    .bd-callout code {
+      border-radius: .25rem;
+    }
+
+    .bd-callout+.bd-callout {
+      margin-top: -.25rem;
+    }
+
+    .bd-callout-info {
+      border-left-color: #5bc0de;
+    }
+
+    .bd-callout-warning {
+      border-left-color: #f0ad4e;
+    }
+
+    .bd-callout-danger {
+      border-left-color: #d9534f;
+    }
+
+    .bd-callout-success {
+      border-left-color: #5cb85c;
+    }
+
+    .bd-callout-primary {
+      border-left-color: #428bca;
+    }
+
+    .bd-callout-info h6 {
+      color: #5bc0de;
+    }
+
+    .bd-callout-warning h6 {
+      color: #f0ad4e;
+    }
+
+    .bd-callout-danger h6 {
+      color: #d9534f;
+    }
+
+    .bd-callout-success h6 {
+      color: #5cb85c;
+    }
+
+    .bd-callout-primary h6 {
+      color: #428bca;
+    }
+  </style>
+  </head>
+
+  <body>
+  <script src="vendor/prism/prism.js"></script>
+
+  <!--     <script src="https://myCDN.com/prism@v1.x/components/prism-core.min.js"></script>
+    <script src="https://myCDN.com/prism@v1.x/plugins/autoloader/prism-autoloader.min.js"></script> -->
+	
+    <!-- Page Content -->	
+    <div class="container">
+
+      <div class="row">
+
+        <!-- Entries Column -->
+        <div class="col-md-9">
+
+          <h2 class="my-4"><span style="color:darkblue">COMP 2211</span>
+            <small>Exploring Artificial Intelligence</small>
+          </h2>
+		  
+		  <!-- ### Change lab number and title ### -->
+		  <h3 class="my-4">Programming Assignment 2: <br />
+            <span style="color:#660066">Multi-layer Perceptron and Convolutional Neural Network</span>
+          </h3>
+		  
+		  
+
+          <!-- Introduction section -->
+		  <!-- ### Complete introduction section for the lab ### -->
+      <div class="card mb-4">
+        <img class="card-img-top" src="images/dataset.png" alt="Dataset">
+		  
+		    <!-- ### Add an image representing the lab content here ### -->
+            <div class="card-body" id="introduction">
+              <h3 class="card-title">Introduction</h3>
+              <p class="card-text">
+                <i>Amateur drawing is a delight, where imaginations take flight.</i></br>
+                <i>In every stroke and every line, lively charm so truly divine.</i></br>
+                <i>With pixels' dance and CNN' might, creations leap to wondrous heights.</i></br>
+                <i>From doodles raw to scenes that shine, tech weaves in motion, line by line.</i></br>
+
+                <br />
+                In this PA, we are going to train a <b>CNN-based object detection model</b> to extract amateur drawings from a photo. Specifically, the model predicts the bounding box (the smallest rectangle region that wraps the object of interest) of the drawing.
+
+                <br />
+                <br />
+                <!-- <img class="card-img-top" src="images/overview.gif" alt="Application" width="300px"> -->
+
+              </p>
+              		  
+            </div>
+            <div class="card-footer text-muted">
+              End of Introduction
+            </div>
+          </div>
+
+
+          <!-- Task Description section -->
+		  <!-- ### Complete introduction section for the lab ### -->
+      <div class="card mb-4">
+        
+		  
+		    <!-- ### Add an image representing the lab content here ### -->
+            <div class="card-body" id="description">
+              <h3 class="card-title">Task Description</h3>
+              <p class="card-text">
+                <h4>Data Source</h4>
+
+                The data used in this PA was retrieved from a research project: 
+                <a href="https://github.com/facebookresearch/AnimatedDrawings">Animated Drawings</a>.
+                However, this PA uses a slightly modified version of the dataset, which is detailed in the notebook.
+                
+              </p>
+
+              <p class="card-text">
+                <h4>Tasks</h4>
+
+                To get started, download the Python notebook <code>pa2_task.ipynb</code>. 
+                Most tasks are graded based on the correctness of the result of a function (graded for accuracy).
+                We will also grade your model performance on an external dataset.
+                <br />
+                <ul>
+                  <li>Data loading
+                    <ul>
+                      <li>Download the dataset</li>
+                      <li>Transform the data to fit the model
+                        <ul>
+                          <li>Task 1: normalize the bounding box feature</li>
+                        </ul>
+                      </li>
+                      <li>Split the data into training and testing dataset
+                        <ul>
+                          <li>Task 2: split the dataset</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>Model compilation & Training
+                    <ul>
+                      <li>Build the object detection model based on ResNet
+                        <ul>
+                          <li>Task 3: add a convolution layer</li>
+                          <li>Task 4: add the output layer</li>
+                          <li>Task 5: define the mean square loss function</li>
+                          <li>Task 6: define the GIoU loss function</li>
+                        </ul>
+                      </li>
+                      <li>Train the model (and wait)
+                        <ul>
+                          <li>Task 7: export model parameters</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>Performance evaluation
+                    <ul>
+                      <li>Examine model performance on the test dataset
+                        <ul>
+                          <li>Task 8: provide the worst samples</li>
+                        </ul>
+                      </li>
+                      <li>Admire our powerful drawing detector
+                        <ul>
+                          <li>Task 9: use the model for new images</li>
+                        </ul>
+                        <ul>
+                          <li>Task 10: predict unknown image data and export results </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </p>
+              		  
+            </div>
+            <div class="card-footer text-muted">
+              End of Task Description
+            </div>
+          </div>
+
+          <!-- Resources section -->
+		  <!-- ### Complete the lab work section for the lab ### -->
+          <div class="card mb-4">      
+            <div class="card-body" id="resources">
+              <h3 class="card-title">Resources</h3>
+			  <p class="card-text">
+
+          Download the <code>.ipynb</code> file by right-clicking and selecting "Save link as".  Open the file in Google Colab to get started. 
+          <ul>
+            <li>PA2 task template: <a href="files/pa2_task.ipynb">pa2_task.ipynb</a></li>
+          </ul>
+         
+     
+          <br />
+         You should download and upload the files to your notebook or link the context to the Google Drive.
+        <a target="_blank" href="https://drive.google.com/drive/folders/1Sm8F1y7Fuh_pEJhKDnUTxv2H3vQK8jGM?usp=sharing"> https://drive.google.com/drive/folders/1Sm8F1y7Fuh_pEJhKDnUTxv2H3vQK8jGM?usp=sharing </a>
+          <br />
+
+          <ul>
+            <li>Backup image collection (538 Mb): images.zip</li>
+            <li>Backup ground truth bounding box (214 Kb): gt_bbox.json
+            </li>
+            <li>Backup image collection for grading purposes (51 Mb): grading_images.zip</li>
+            <li>Backup list of paths to individual images for grading purposes (5 Kb): grading_paths.pkl</li>
+            <li>Backup image collection for testing purposes (27.6 Mb) testing_images.zip</li>
+            <li>Backup list of paths to individual images for testing purposes (4 Kb): testing_paths.pkl</li>
+
+          </ul>
+         
+     
+
+            </div>
+      <div class="card-footer text-muted">
+              End of Download
+            </div>
+          </div>
+
+          <div class="card mb-4">            
+            <div class="card-body" id="changelog">
+              <h3 class="card-title">Resource Changelog</h3> 
+			  <p class="card-text">
+          <ul>
+            <li><b>2024-04-15</b>: Initial release.</li>
+            <li><b>2024-04-24</b>: Clarify tasks and fix a file export bug.</li>
+              <ul>
+                <li>Task 5 <code>se_func</code>: Clarify that the output shape is (M, 1).</li>
+                <li>Task 6 <code>giou_func</code>: Clarify that the output shape is (M, 1).</li>
+                <li>Task 7 <code>loss_func</code>: Clarify taht the output is a scalar value.</li>
+                <li>Task 8 <code>extract_failure_case</code>: Update the parameter name and example use.<br/>
+                  <pre><code class="language-python">def extract_failure_case(loss_function, pred, gt, k=5):
+""" Extract failure cases with the worst performance.
+loss_function: a loss function that calculates the scalar loss value for pairwise prediction (4,) and results (4,)
+pred: the predicted bounding box (scaled to the image size)
+gt: the ground truth bbox in the test dataset
+k: the number of top failures with the largest loss value
+return the indexes to the top k failure case
+"""
+# Task 8: Extract failure cases
+###### TO DO ######
+###################
+pass</code></pre>
+<pre><code class="language-python">from sklearn.metrics import mean_absolute_error
+# https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_absolute_error.html
+
+if __name__ == '__main__':
+  test_pred = model.predict(test_x)
+  n_failures = 20
+  worst_case_indexes = extract_failure_case(mean_absolute_error, test_pred, test_y, n_failures)
+  for k in range(n_failures):
+    idx = worst_case_indexes[k]
+    test_pred_instance, gt_instance = rescale_bbox(test_url[idx], test_pred[idx], test_y[idx])
+    visualize_bounding_box(test_url[idx], test_pred_instance, gt_instance)</code></pre>
+                </li>
+                <li>Task 10: Fix the error in exporting <code>testing_pred.pkl</code>.<br/>
+                  <pre><code class="language-python">with open('testing_pred.pkl', 'wb') as f:
+  pickle.dump(testing_pred, f, pickle.HIGHEST_PROTOCOL)</code></pre>
+                </li>
+              </ul>
+              <li><b>2024-05-04</b>: Minor revision on parameter description.</li>
+              <ul>
+                <li>
+                  Task 8 <code>extract_failure_case</code>: Clarify the behavior of <code>loss_function</code>.<br/>
+                  <pre><code class="language-python">"""
+loss_function: a loss function that calculates the scalar loss value for pairwise prediction (4,) and results (4,).
+"""</code></pre>
+              </li>
+            </ul>
+          </ul>
+          
+        </p>
+            </div>
+      <div class="card-footer text-muted">
+              End of Changelog
+            </div>
+          </div>
+
+          
+          <div class="card mb-4">            
+            <div class="card-body" id="grading">
+              <h3 class="card-title">Submission &amp; Deadline</h3> 
+			  <p class="card-text">
+          Deadline: <span style="color:red">Saturday, 11 May 2024, 
+            0:59 AM (midnight) <del>Friday, 10 May 2024, 
+              23:59</del></span>.
+
+            <h4>ZINC Submission</h4>
+
+            <ol>
+              <li>Download your code as <code>pa2_task.py</code> from 
+              Google Colab by clicking <b>File</b> -> <b>Download</b> -> <b>Download</b>.</li>
+              <li>Remove (1) the printed message about CPU/GPU and (2) statements starting with <code>!</code> in the data loading section.</li> 
+              <li>Download your predicted results for grading as <code>grading_pred.pkl</code>, predicted results for testing as <code>testing_pred.pkl</code>, and trained parameters for plagarism checking as <code>proof.pkl</code> from Google Colab using the <b>File Manager Panel</b><sup><a target="_blank" href="https://stackoverflow.com/questions/48774285/how-to-download-file-created-in-colaboratory-workspace" title="How?">?</a></sup>.</li>
+            
+              <li>Put the <code>pa2_task.py</code>, <code>proof.pkl</code>, <code>grading_pred.pkl</code> files in the same folder and compress it to a <code>zip</code> file. The name of the zip file does not matter, but your code and prediction results should be strictly named. For testing, please zip <code>pa2_task.py</code>, <code>proof.pkl</code>, and <code>testing_pred.pkl</code>.</li>
+              <li>Submit the zip file to <a href="https://zinc.cse.ust.hk">ZINC</a>. 
+                ZINC usage instructions can be found <a
+              href="https://zinc.cse.ust.hk/guide">here</a>.</li>
+              <li><strong>Reminder: </strong> We will use other test cases and datasets to
+              for the final grading. This means that if you hard code the answers, 
+              or make your model specific for this dataset somehow, your final PA2 grade may be much lower
+              than the grade given by ZINC.</li>
+
+            </ol>
+          
+        </p>
+            </div>
+      <div class="card-footer text-muted">
+              End of Submission &amp; Deadline
+            </div>
+          </div>
+
+
+          
+		  
+		  <!-- Frequently asked questions section -->
+		  <!-- ### Complete frequently asked questions section for the lab ### -->
+          <div class="card mb-4">            
+            <div class="card-body" id="faq">
+              <h3 class="card-title">Frequently Asked Questions</h3> 
+			  <p class="card-text">
+			  This list is incomplete; you can help by <a href="mailto:lxieai@connect.ust.hk"><u>expanding it</u></a>.
+        You may check here <a href="https://drive.google.com/file/d/1Far4ljNXZfqIU-vH5zxW9HKcRhpEjtmA/view?usp=sharing" target="_blank">[Colab Notebook]</a> for the latest updates on task description.<br/><br /> 
+          </p>
+
+        <b>Q1: </b> In Task 1/2, what is the target shape of the outputs?  <br />
+          <ul>
+            <li>After preprocessing the data in Task 1, you should have obtained (1) <code>urls</code>: (N, ), (2) <code>images</code>: (N, 224, 224, 3), and (3) <code>bbox</code>: (N, 4).</li>
+            <li>Task 2 essentially requires you to further split the data obtained in Task 1 into training and testing datasets. The overall shape is maintained, except that the testing dataset has <code>test_size</code> instances, and the training dataset has (<code>N - test_size</code>) instances.</li>
+            <li>You are strongly encouraged to verify the output by printing out the variables, but don't forget to remove self-printed statements before submission.</li>
+          </ul>
+        <br />
+
+        <b>Q2: </b> In Task 1/2, shall I shuffle the dataset? <br />
+
+        <p style="margin-left: 25px;">
+          There is no such requirement, as the dataset is already randomly distributed. However, feel free to shuffle the dataset before splitting it into training and testing datasets. The scoring function on ZINC will take care of your permutation.
+        </p>
+        <br />
+
+
+
+        <b>Q3: </b> For the loss function, what is the target shape of the outputs? What does <code>loss_func</code> do? <br />
+          <ul>
+            <li> In Task 5/6, <code>se_loss</code> and <code>giou_loss</code> functions have similar input-output structure. All input parameters are a (batch_size, 1) tensor. And the output should be a (batch_size, 1) tensor of the loss value for each pair of predicted value and the ground truth.</li>
+            <li>  For the function <code>loss_func</code>, it obtains the batch loss value by calling the <code>se_loss</code> or <code>giou_loss</code> functions. The final output is a scalar value of the loss for the entire batch by averaging.</li>
+          </ul>
+           
+          
+  
+        <br />
+
+        <b>Q4: </b> The training runs smoothly, but I am not sure whether the performance is satisfying. What can I do? What is the target loss value?<br />
+        <p style="margin-left: 25px;margin-bottom: 0;">
+          There is not a strict range for the loss value. You can submit your prediction to ZINC and see if you are getting close. Here are some tips for gaining confidence in your model performance.
+          <ul>
+            <li>First, the squared error loss and the GIoU <b>loss are NON-NEGATIVE</b>.</li>
+            <ul>
+              <li> When computing the GIoU loss, some students forgot to consider the case when the pred_bbox and the gt_bbox are non-overlapping.</li>
+              <li> It is assumed that the model will predict the bbox in [0, 1]^4. However, this does not necessarily hold. This may lead to large negative loss during training. To overcome this, try another model set up or add some remedies in the output layer or the loss function.  </li>
+            </ul>
+            <li>Second, the <b>loss value should be decreasing during training</b>. If not, (1) your model architecture may be not good enough, or (2) your optimizer does not break through the local minima. </li>
+            <li>Third, when evaluating the model on the test dataset, the performance should be somehow similar to the training dataset (Or you may be overfitting). You can write some code to see if the MAE on the test dataset is close to 30~50.</li>
+            <ul>
+              <li>Here is an example on how you can extend the training logs with more metrics. Note that here MAE is for the noramlized bbox instead of the regular bbox used in ZINC.<br/><pre><code class="language-python">model.compile(optimizer='adam', loss=loss_func, metrics=['mae', loss_func])
+model.fit(x=train_x, y=train_y, epochs=20, batch_size=32, validation_data=(test_x, test_y), callbacks=[tensorboard_callback])</code></pre></li>
+            </ul>
+            <li>Take a look at the visualizations of the test instances. If random cases are generally satisfying and the worst cases are reasonably okay, it is highly likely that your model is a good one. You may want to reuse the function <code>visualize_bounding_box</code>. If there are certain weird patterns in the predicted bounding box, there can be problems with your model.</li>
+            <li>Last, you can run another baseline model to see if your model achieves better performance. If you reach 35 in ZINC's self-testing, you may attain a satisfying model. The hidden test cases will not affect your MAE performance, but the threshold for grading may be slightly adjusted according to the entire submission pool.</li>
+          </ul>
+        
+        </p>
+      <br />
+
+      <b id="model_improvement">Q5: </b> What can I do to improve the model? <br/>
+
+      <p style="margin-left: 25px;margin-bottom: 0;">
+        Here are some tips for improving the model performance.
+        <ul>
+          <li>First, you can try different hyperparameters, such as the learning rate, the batch size, the number of epochs, and what optimizer to use.</li>
+          <li>Second, you can tweak the model architecture, such as adding in new layers or adjust the activation functions. In principle, you can make any adjustment as long as you have fulfilled all requirements. You can also import other layer types. Please keep the <code>check_layer_1</code> and <code>check_layer_2</code> as it is in the original code, since they are required in Task 7.</li>
+          <li>Third, you can use more data for training. By default, only half of available images are loaded.</li>
+        </ul>
+      </p>
+      <br/>
+
+        <b>Q6: </b> On my local machine, I cannot access the GPU environment. What can be the reasons?<br/>
+        <p style="margin-left: 25px;margin-bottom: 0;">
+          <ul>
+            <li>This assignment is based on tensorflow version 2.15.0 and the tested Python version is 3.10.12.</li>
+            <li> Here is a reference for setting up the environment on a local machine: <a href="https://www.tensorflow.org/install/pip" target="_blank">https://www.tensorflow.org/install/pip</a>.
+              <ul>
+                <li> Tensorflow with GPU does not support MacOS.</li>
+                <li>There are additional requirements on CUDA for Win10 or Linux.</li>
+              </ul>
+           </li>
+           <li> Anyway, you can always may attend the lab session or bring the laptop to the office hours for further diagnosis.</li>
+          </ul>
+        </p>
+        <br />
+
+        <b>Q7: </b> Can I remove the TensorBoard dependancy? <br />
+
+
+          <ul>
+            <li>If you find errors like "Error: Malformed GraphDef", give it another shot by rerunning the code after traning.</li>
+            <li>If you are running the code in your local environment, it is common to run into compatability issues for TensorBoard.</li>
+            <li>In general, you may skip the visualization part of the training process.
+              You can achieve this by commenting out the code configuring the TensorBoard and train the model:<br/>
+<pre class="sm rounded" ><code class="language-python"> model.fit(train_x, train_y, epochs=N_EPOCH, batch_size=64)</code></pre>
+            </li>
+          </ul>
+
+        
+          
+         
+       
+        <br />
+
+        <b>Q8: </b> What are possible reasons for failing Task 9 (Test 8)? <br />
+
+        <p style="margin-left: 25px;">
+          Your implementation of the function <code>predict_bounding_box(model, src)</code> may have some issues, since this task has no uncertainty. Please check if you have preprocess the image appropriately.
+        </p>
+       
+        <br />
+
+        <b>Q9: </b> To what extent can I write my own code? <br />
+
+        <p style="margin-left: 25px;">
+          <ul>
+            <li>It is always okay to wrap your own code in a main function block. Every statements in the main function block can be adjusted, as we only test your implementation of individual functions.</li>
+        
+              <pre class="sm rounded" style="margin-left:0px"><code class="language-python">if __name__ == '__main__':
+  # Your own function</code></pre>
+            <li>Please do not import external libraries that are not present in the notebook. It is okay to use other Keras model layers. </li>
+            <li>As long as you have accompolish task requirements, you can always change the model architecture. Please keep the <code>check_layer_1</code> and <code>check_layer_2</code> as it is in the original code, since they are required in Task 7.</li>
+          </ul>
+        </p>
+       
+        <br />
+
+        <b>Q10: </b> I ran out of GPU quota on Colab. What can I do? <br />
+
+        <p style="margin-left: 25px;">
+          <ul>
+            <li>(✧Recommended) Connect to HKUST GPU services with VS Code, detailed <a href="#gpu">below</a>.</li>
+            <li>(✧Recommended) Open a new Google account to enjoy free quota again.</li>
+            <li>Wait for the next release of the GPU quota or subscribe to the GPU service.</li>
+            <li>Configure your own local environment. Check <a href="https://www.tensorflow.org/install/pip#windows-wsl2">[Tensorflow website]</a>. Note that currently there is no GPU support for MacOS.</li>
+            <li>Use CPU instead. Only model training heavily relies on GPU. You may move forward to other parts.</li>
+          </ul>
+        </p>
+       
+        <br />
+
+        <b>Q11: </b>What does this error message mean? <br />
+
+        <p style="margin-left: 25px;">
+          <ul>
+            <li>Task X: <u>"No GPU, using /device:CPU:0."</u></li>
+            <ul><li>Please remove or comment out this print function at the very beginning of the notebook.</li></ul>
+            <li>Task X: <u>"Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered. Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered. Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered."</u></li>
+            <ul><li>Please ignore all messages in the error panel. ZINC grades based on the user output. This warning message is inherent to Tensorflow import.</li></ul>
+            <li>Task 8: <u>"ValueError: Image size of xxx * xxx pixels is too large. It must be less than 2^16 in each direction."</u></li>
+            <ul>
+              <li>Your model predicts an unrealistic result. Please improve your model performance <a href="#model_improvement">[How?]</a>.</li>
+              <li>A temporary solution to suppress the error:<br/>
+                <pre class="sm rounded"><code class="language-python">if __name__ == '__main__':
+  test_pred = model.predict(test_x)
+  n_failures = 20
+  worst_case_indexes = extract_failure_case(mean_absolute_error, test_pred, test_y, n_failures)
+  for k in range(n_failures):
+    idx = worst_case_indexes[k]
+    test_pred_instance, gt_instance = rescale_bbox(test_url[idx], test_pred[idx], test_y[idx])
+    # This is the newly added patch
+    if np.sum(np.abs(test_pred_instance)) > 4000:
+      print('bad prediction', test_pred_instance)
+      continue
+    visualize_bounding_box(test_url[idx], test_pred_instance, gt_instance)</code></pre>
+              </li>
+            </ul>
+            <li>Task 9: <u>"The first dimension of paddings must be the rank of inputs[4,2] [32,224,3]."</u></li>
+            <ul><li>The input to the model should be an array of instances. <a href="https://www.tensorflow.org/api_docs/python/tf/keras/Model#predict" target="_blank">[Documentation]</a></li></ul>
+           <li>Task 10: <u>"Found input variables with inconsistent numbers of samples: [200, 100]."</u> </li>
+           <ul><li>You are using an older verson of the notebook. Please update the code that generates <code>testing_pred.pkl</code> and update this file in your ZINC submission.<br/>
+            <pre><code class="language-python">with open('testing_pred.pkl', 'wb') as f:
+  pickle.dump(testing_pred, f, pickle.HIGHEST_PROTOCOL)</code></pre>
+          </li></ul>
+           <li>Test 12 (Self Testing): <u>Failure</u>.</li>
+           <ul><li>Don't worry. Test 12 has 0 score. This test shows your MAE score.</li></ul>
+          </ul>
+        </p>
+       
+        <br />
+
+
+
+            </div> 
+			<div class="card-footer text-muted">
+              End of Frequently Asked Questions
+            </div>
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-body" id="gpu">
+              <h3 class="card-title">GPU Resource</h3>
+             
+                <h5>Connect to the Virtual Machine</h5>
+                <hr/>
+                <ul>
+                  <li> You can access the virtual machine (VM) in the HKUST network. If you are not at school, please use VPN <a href="https://itsc.hkust.edu.hk/services/cyber-security/vpn/connection-establishment" target="_blank">[How?]</a>.</li>
+                  <li> Use your ITSC account to log in, not the entire email.</li>
+                  <li> There are 28 VMs available.
+                    <ul>
+                    </ul>
+                   </li>
+                  
+                </ul>
+              
+              <br/> 
+
+              <h6><b>Option 1: Connect via VS Code</b></h6>
+        
+              To make your life happier, you can access the GPU resource provided by HKUST through Visual Studio Code (VS Code). This text editor makes it convenient for you to interactively modify and run the notebook.<br/><br/>
+First, install Visual Studio Code from <a href="https://code.visualstudio.com/" target="_blank">https://code.visualstudio.com/</a>.<br/><br/>
+       Second, install the "Remote - SSH" extension from the Extension Marketplace in VSCode.<br/><br/>
+             Third, use the extension to connect to the HKUST GPU VM. You need to configure the <code>.ssh/config</code> file properly.<br/>
+              <pre class="sm rounded">
+<code class="language-bash">Host ugcnode01
+  HostName ugcnode01.cse.ust.hk
+  User YOUR_ITSC
+  Port 22
+
+Host ughostXX
+  HostName ughostXX
+  User YOUR_ITSC
+  Port 22
+  ProxyJump ugcnode01</code></pre><br/>
+              You may see a pop-up window in the bottom right or the top middle. Please follow the instructions and don't forget to press "enter".
+              Then you can enjoy the remote VM as if working in your own machine.
+             
+<br/><br/>
+
+                <h6><b>Option 2: Connect via Local Command-Line Interface</b></h6>
+                You can connect to the VM through the command-line interface of your own device, such as the "Terminal" in MacOS and the "PowerShell" in Windows. <br/>
+                <pre class="sm rounded" style="margin-bottom: 0;"><code class="language-bash">ssh YOUR_ITSC@ugcnode01.cse.ust.hk</code></pre>
+                Then enter your password of the CSE UG UNIX account. It can be different from your ITSC password.
+                <br/>
+                <pre class="sm rounded" style="margin-bottom: 0;"><code class="language-bash">check_usage</code></pre>
+                Then you will see which VM is available. Based on the printed message, you can log on to ughostXX using ssh. XX is an actual number.
+                <pre class="sm rounded"><code class="language-bash">ssh YOUR_ITSC@ughostXX</code></pre>
+
+                <br/><br/>
+
+                <h5>Setup Local Environment</h5>
+                <hr/>
+              First, please verify that a Python environment (> 3.9) is available. Simply type <code>python3 --version</code> in the terminal and get its location using <code>which python3</code>. If not, please switch to another VM or install the Python environment from scratch (not recommended).<br/>
+                  Note that the VM may be initially based on <code>tcsh</code> (C Shell).
+                <pre class="sm rounded">
+<code class="language-bash">bash
+/usr/bin/python3 -m venv pa2
+source pa2/bin/activate
+pip install --upgrade pip
+pip install --upgrade tensorflow[and-cuda]==2.15.1
+pip install --upgrade matplotlib scikit-learn opencv-python
+</code></pre>
+
+Next, check the most updated CUDA version installed in the VM.
+<pre class="sm rounded" style="margin-bottom: 0;">
+<code class="language-bash">for d in /usr/local/cuda*; do
+  echo "$d/bin"
+done</code></pre>
+Then you may set the CUDA path in the <code>.bashrc</code> file accordingly, taking cuda-12.1.1 as an example.
+<pre class="sm rounded" style="margin-bottom: 0;">
+<code class="language-bash">echo "export PATH=/usr/local/cuda-12.1.1/bin${PATH:+:${PATH}}" >> ~/.bashrc
+echo "export LD_LIBRARY_PATH=/usr/local/cuda-12.1.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" >> ~/.bashrc
+source ~/.bashrc
+</code></pre>
+
+<br/><br/>
+<h5>Run Your Code</h5>
+<hr/>
+The simpliest way to run your code is to use VS Code. However, you can also use the Python interpreter or the iPython environment in the native terminal without installing anything. 
+<br/><br/>
+
+<h6><b>Option 1: Developing in VS Code</b></h6>
+Code in the VS Code editor and use the terminal in VS Code to run the code.
+<br/><br/>
+
+<h6><b>Option 2: Developing in Command-line Interface</b></h6>
+
+You can enjoy the Jupyter Lab (or Jupyter Notebook) environment by forwarding the port to your local machine. Here is a step-by-step guide.
+<ul>
+  <li>First, open one terminal and ssh into your ughostxx. Run jupyter lab​ and access the port and the URL, lets say http://localhost:8888/lab?token=xxxxxx <br/>
+    <pre><code class="language-bash"># Connect to the VM
+ssh YOUR_ITSC@ugcnode01.cse.ust.hk
+ssh YOUR_ITSC@ughostXX
+# Prevent the connection from being interrupted
+tmux new -s pa2
+jupyter lab --no-browser
+# Then you will see the URL like http://localhost:8888/lab?token=xxxxxx; 8888 is the port number.</code></pre>
+  </li>
+  <li>Second, open another terminal and ssh into the ugcnode01.cse.ust.hk. Try a port number, say 1111. If it is occupied, try another.<br/>
+<pre><code class="language-bash">ssh YOUR_ITSC@ugcnode01.cse.ust.hk
+tmux new -s pa2
+ssh -v -L 1111:localhost:8888 YOUR_ITSC@ughostXX</code></pre>
+  </li>
+  <li>Third, open the third termianl and forward the port 1111 from ugcnode01 to a random one, say 2222. Please try another port number if it is occupied.<br/>
+<pre><code class="language-bash">ssh -v -L 2222:localhost:1111 YOUR_ITSC@ugcnode01.cse.ust.hk
+</code></pre>
+  </li>
+  <li>Last, open your browser and visit http://localhost:2222/lab?token=xxxxxxx. Just copy the postfix from the first terminal.</li>
+</ul>
+
+
+You can change the port number. Here is the command to forward the port.<br/>
+<pre><code class="language-bash">ssh -v -L [local-port]:[remote-host]:[remote-port] [user]@[ssh-server]</code></pre>
+
+
+<br/><br/>
+You can use <code>scp</code> <a href="https://www.geeksforgeeks.org/scp-command-in-linux-with-examples/" target="_blank">[How?]</a> to manage file transfer, especially for <code>pa2_task.py</code>. For every statement starting with "!" in the notebook, you can run in the terminal to prepare relevant files.
+
+
+<br/><br/>
+Feel free to reach out if you meet with any issues. It is okay to schedule a meeting with Shelly to set up the environment.
+
+
+
+<!-- <pre class="sm rounded">pip install --upgrade jupyter jupyterlab ipykernel
+python -m ipykernel install --user --name=pa2 --display-name="Python (pa2)"
+
+</pre> -->
+
+            </div>
+            <div class="card-footer text-muted">
+              End of GPU Resource.
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3">
+		  <div class="sticky-top">
+            <!-- Menu Widget -->
+            <div class="card my-12">
+              <h5 class="card-header">Menu</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="mb-0" type="circle" style="padding-left:20px">
+					  
+                      <li>
+                        <a href="#introduction">Introduction</a>
+                      </li>
+                      <li>
+                        <a href="#description">Task Description</a>
+                      </li>
+
+                      <li>
+                        <a href="#resources">Resources</a>
+                      </li>
+                      <li>
+                        <a href="#changelog">Resources Changelog</a>
+                      </li> 
+			  		  <li>
+				  	    <a href="#grading">Submission &amp; Deadline</a>
+					  </li>
+					  <li>
+						<a href="#faq">Frequently Asked Questions</a>
+					  </li>
+            <li>
+              <a href="#gpu">GPU Resource</a>
+              </li>
+                    </ul>
+                  </div>                
+                </div>
+              </div>
+		    </div>
+          		  
+		    <!-- Maintainance widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Page maintained by</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-unstyled mb-0">
+                      <li>XIE, Liwenhan (Shelly)</li>
+                         <br/>
+                      <li>
+                        LUI, Ka Kit (Jacky)
+                      </li>
+                   
+                    <br/>
+                     
+					  <li>Last Modified: <script type="text/javascript">document.write(document.lastModified);</script></li>
+                    </ul>
+                  </div>				
+                </div>
+              </div>
+			</div>          
+		  		  
+
+	      </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+  
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Maintained by COMP 2211 Teaching Team &copy; 2024 HKUST Computer Science and Engineering</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>	
+  </body>
+
+</html>
+

@@ -15,6 +15,7 @@ This repo is the programming assignment for **COMP2211: Exploring Artificial Int
 Object detection is a standard task in computer vision. The goal is to identify regions of interest from an input image. In our case, we are going to extract the bounding box for the character (2nd subfigure from left to right). A bounding box is the smallest rectangle region that wraps the object of interest. With the bounding box, it will be easy to segment the character from the image, and then facilitate the downstream animation generation tasks.
 
 ![](./images/segmentation-illustration.gif)
+
 Image modified from Meta's [Animated Drawings](https://github.com/facebookresearch/AnimatedDrawings).
 
 We are using the [*Amateur Drawings Dataset*](https://github.com/facebookresearch/AnimatedDrawings?tab=readme-ov-file#amateur-drawings-dataset). The original dataset comprises over 178K (~50Gb) images and associated annotations of amateur drawings. Due to the limit of Google Colab, the assiduous TAs have prepared a smaller sample.

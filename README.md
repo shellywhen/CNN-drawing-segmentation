@@ -18,7 +18,7 @@ Object detection is a standard task in computer vision. The goal is to identify 
 
 Image modified from Meta's [Animated Drawings](https://github.com/facebookresearch/AnimatedDrawings).
 
-We are using the [*Amateur Drawings Dataset*](https://github.com/facebookresearch/AnimatedDrawings?tab=readme-ov-file#amateur-drawings-dataset). The original dataset comprises over 178K (~50Gb) images and associated annotations of amateur drawings. Due to the limit of Google Colab, the assiduous TAs have prepared a smaller sample.
+We are using the [*Amateur Drawings Dataset*](https://github.com/facebookresearch/AnimatedDrawings?tab=readme-ov-file#amateur-drawings-dataset). The original dataset comprises over 178K (~50Gb) images and associated annotations of amateur drawings. Due to the limit of Google Colab, the TAs have prepared a smaller sample.
 
 The filtered dataset has 2K (~500Mb) amateur drawing images. And the JSON file records the annotation list. Each entry has the src field about the relative path to the image, and the bbox field is defined by [x, y, width, height], where x and y is the horizontal and vertical position of the top left corner.
 
@@ -33,12 +33,6 @@ The filtered dataset has 2K (~500Mb) amateur drawing images. And the JSON file r
     ]
 }
 ```
-
-To implement the CNN model, we will utilize the Tensorflow and Keras packages. They are well-suited for individuals new to machine learning. For detailed information, please consult the official documentation or refer to an example.
-
-We will also take advantage of a pre-trained model (a machine learning model that has been trained on a large dataset to perform specific tasks) -- the well-known ResNet. Using a pretrained model instead of training one from scratch is like having a seasoned chef prepare the base of your dish, rather than starting to cook without any prior kitchen experience. It has encapsulated rich knowledge from a general dataset of natural images in its parameters. We will use our unique dataset to combat its limited understanding of children's amateur drawings. To achieve this, we need to modify the model architecture to fit in our object detection task, while freezing its weights.
-
-In this programming assignment, we will follow three procedures.
 
 To implement the CNN model, we will utilize the `Tensorflow` and `Keras` packages. They are well-suited for individuals new to machine learning. For detailed information, please consult the official [documentation](https://www.tensorflow.org/api_docs/python/tf) or refer to an [example](https://www.tensorflow.org/hub/tutorials/object_detection).
 

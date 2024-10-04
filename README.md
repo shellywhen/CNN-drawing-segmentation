@@ -2,9 +2,9 @@
 This repo is the programming assignment for **COMP2211: Exploring Artificial Intelligence** taught by [Dr. Desmond Tsoi](https://www.cse.ust.hk/~desmond/) and [Dr. Pearl Xiao](https://huiruxiao.github.io/) at the Hong Kong University of Science and Technology. Most students are Year 1 undergraduate students.
 
 - Solution [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1dZ_U6PHbpGhaQwtvh-VyUcV8KxfIkZFz?usp=sharing)
-- Question [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://drive.google.com/file/d/1Far4ljNXZfqIU-vH5zxW9HKcRhpEjtmA/view?usp=sharing
+- Original Assignment [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://drive.google.com/file/d/1Far4ljNXZfqIU-vH5zxW9HKcRhpEjtmA/view?usp=sharing
 )
-- A copy of the course Website: [[Link]](https://shellywhen.github.io/CNN-drawing-segmentation/)
+- A copy of the course website: [[Link]](https://shellywhen.github.io/CNN-drawing-segmentation/)
 - Dataset: [[Google Drive]](https://drive.google.com/drive/folders/1Sm8F1y7Fuh_pEJhKDnUTxv2H3vQK8jGM?usp=sharing)
 
 > *Amateur drawing is a delight, where imaginations take flight.*

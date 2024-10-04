@@ -7,10 +7,10 @@ This repo is the programming assignment for **COMP2211: Exploring Artificial Int
 - A copy of the course website: [[Link]](https://shellywhen.github.io/CNN-drawing-segmentation/)
 - Dataset: [[Google Drive]](https://drive.google.com/drive/folders/1Sm8F1y7Fuh_pEJhKDnUTxv2H3vQK8jGM?usp=sharing)
 
-> *Amateur drawing is a delight, where imaginations take flight.*
-*In every stroke and every line, lively charm so truly divine.*
-*With pixels' dance and CNN' might, creations leap to wondrous heights.*
-*From doodles raw to scenes that shine, tech weaves in motion, line by line.*
+> *Amateur drawing is a delight, where imaginations take flight.* <br>
+> *In every stroke and every line, lively charm so truly divine.* <br>
+> *With pixels' dance and CNN' might, creations leap to wondrous heights.* <br>
+> *From doodles raw to scenes that shine, tech weaves in motion, line by line.*
 
 Object detection is a standard task in computer vision. The goal is to identify regions of interest from an input image. In our case, we are going to extract the bounding box for the character (2nd subfigure from left to right). A bounding box is the smallest rectangle region that wraps the object of interest. With the bounding box, it will be easy to segment the character from the image, and then facilitate the downstream animation generation tasks.
 
